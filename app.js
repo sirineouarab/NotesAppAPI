@@ -6,14 +6,15 @@ const cors = require("cors");
 const app = express();
 
 app.use(express.json());
+
+const noteRoutes = require("./routes/noteRoutes");
+app.use("/api/notes", noteRoutes);
+
 app.use(
   cors({
     origin: ["http://localhost:5173"],
   })
 );
-
-const noteRoutes = require("./routes/noteRoutes");
-app.use("/api/notes", noteRoutes);
 
 //  connecting to database
 const dbURL = process.env.URLDB;
@@ -27,7 +28,7 @@ mongoose
 
     // listin to requests
     app.listen(process.env.PORT || 5000, () => {
-      console.log(`listining to requests on port ${process.env.PORT || 3000}`);
+      console.log(`listining to requests on port ${process.env.PORT || 5000}`);
     });
   })
   .catch((error) => {

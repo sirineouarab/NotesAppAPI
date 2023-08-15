@@ -2,21 +2,11 @@ const express = require("express");
 const router = express.Router();
 const Note = require("../models/noteModel");
 
-// router.get("/", async (req, res) => {
-//   try {
-//     const notes = await Note.find();
-//     res.json(notes);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// });
-
 router.get("/", async (req, res) => {
   try {
     const notes = await Note.find();
     res.json(notes);
   } catch (err) {
-    console.error("Error fetching notes:", err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -30,6 +20,7 @@ router.post("/", async (req, res) => {
     title: req.body.title,
     content: req.body.content,
     time: new Date(),
+    color: req.body.color,
   });
   try {
     const newNote = await note.save();
