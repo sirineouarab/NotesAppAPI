@@ -7,14 +7,14 @@ const app = express();
 
 app.use(express.json());
 
-const noteRoutes = require("./routes/noteRoutes");
-app.use("/api/notes", noteRoutes);
-
 app.use(
   cors({
     origin: "*",
   })
 );
+
+const noteRoutes = require("./routes/noteRoutes");
+app.use("/api/notes", noteRoutes);
 
 //  connecting to database
 const dbURL = process.env.URLDB;
